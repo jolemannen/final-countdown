@@ -16,9 +16,31 @@ let robocop = sprites.create(img`
 . . . 3 . . . . . . . . . . . . 
 . . . . . . . . . . . . . . . . 
 `, SpriteKind.Player)
+controller.moveSprite(robocop, 20, 20)
+scene.setBackgroundColor(1)
+let mySprite = sprites.create(img`
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . 3 3 . . . . . . . . . . 
+. . . . 3 3 3 3 . . . . . . . . 
+. . . . 3 3 3 3 3 3 . . . . . . 
+. . . . 3 2 3 3 2 3 . . . . . . 
+. . . . 3 3 3 3 3 3 3 . . . . . 
+. . . . 3 3 1 1 1 3 3 3 . . . . 
+. . . . . 3 3 3 3 3 3 3 3 3 . . 
+. . . . . . 3 3 3 3 3 3 3 3 . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+`, SpriteKind.Enemy)
+mySprite.setPosition(128, 38)
 game.onUpdate(function () {
-	
-})
-game.onUpdate(function () {
-    controller.moveSprite(robocop, 100, 100)
+    if (robocop.overlapsWith(mySprite)) {
+        game.over(true, effects.confetti)
+    } else {
+        mySprite.setPosition(61, 32)
+    }
 })
